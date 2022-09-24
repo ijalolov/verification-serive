@@ -17,8 +17,6 @@ class BaseVerification(models.Model):
     """"""
     
     scope = None
-    default_expire_timedelta = 2 * 60  # seconds
-    default_allowed_attempts = 3
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
