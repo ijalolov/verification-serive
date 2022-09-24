@@ -63,12 +63,12 @@ class BaseVerification(models.Model):
             return False, _("State not found.")
         if ins.expired_at < timezone.now():
             success = False
-            ins.active = True
+            ins.active = False
             ins.save(update_fields=('active',))
             message = _("Time expired.")
         elif ins.attempts >= cls.get_allowed_attempts_count():
             success = False
-            ins.active = True
+            ins.active = False
             ins.save(update_fields=('active',))
             message = _("All attempts are used.")
         elif ins.code != code:
@@ -81,7 +81,8 @@ class BaseVerification(models.Model):
             message = _("Verified.")
             ins.attempts = F('attempts') + 1
             ins.verified = True
-            ins.save(update_fields=('attempts', 'verified'))
+            ins.active = True
+            ins.save(update_fields=('attempts', 'verified', 'active'))
         return success, message
     
     def make_used(self):
