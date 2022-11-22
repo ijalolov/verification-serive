@@ -13,11 +13,11 @@ class Migration(migrations.Migration):
         migrations.RenameField(
             model_name='emailverification',
             old_name='state',
-            new_name='verification_state',
+            new_name='signature',
         ),
         migrations.RenameField(
             model_name='smsverification',
             old_name='state',
-            new_name='verification_state',
+            new_name='signature',
         ),
     ]

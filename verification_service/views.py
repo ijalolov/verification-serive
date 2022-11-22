@@ -5,13 +5,11 @@ from . import serializers
 from . import models
 
 
-
 class SMSVerificationSendCode(CreateAPIView):
     queryset = models.SMSVerification.objects.all()
     serializer_class = serializers.SMSVerificationCreateSerializer
     
     
-
 class SMSVerificationCheckCode(GenericAPIView):
     queryset = models.SMSVerification.objects.all()
     serializer_class = serializers.SMSVerifySerializer
