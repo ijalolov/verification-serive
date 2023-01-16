@@ -1,7 +1,11 @@
-def get_ip_address(request):
-    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-    if x_forwarded_for:
-        ip = x_forwarded_for.split(',')[0]
-    else:
-        ip = request.META.get('REMOTE_ADDR')
-    return ip
+from django.core.cache import cache
+
+
+def sms_check_verified(uuid) -> bool:
+    # Check if phone number is verified
+    # Is it necessary to delete after valid verification?
+    data = cache.get_many(cache.keys(f"*_{uuid}"))
+    for d in data:
+        if data[d]['verified']:
+            return True
+    return False

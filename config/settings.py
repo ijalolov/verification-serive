@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'rest_framework',
-    'verification_service'
+    'verification_service',
 ]
 
 MIDDLEWARE = [
@@ -108,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tashkent'
 
 USE_I18N = True
 
@@ -126,18 +126,26 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+# 
+# VERIFICATION_SERVICE = {
+#     'sms': {
+#         'sms_min_period': 2 * 60,  # 120 seconds
+#         'allowed_attempts': 3,
+#         'message_pattern': 'Code: %(code)s',
+#         'code_expire': 2 * 60,  # 120 seconds
+#     },
+#     'email': {
+#         'sms_min_period': 2 * 60,  # 120 seconds
+#         'allowed_attempts': 3,
+#         'message_pattern': 'Code: %(code)s',
+#         'code_expire': 2 * 60,  # 120 seconds
+#     }
+# }
 
-VERIFICATION_SERVICE = {
-    'sms': {
-        'sms_min_period': 2 * 60,  # 120 seconds
-        'allowed_attempts': 3,
-        'message_pattern': 'Code: %(code)s',
-        'code_expire': 2 * 60,  # 120 seconds
-    },
-    'email': {
-        'sms_min_period': 2 * 60,  # 120 seconds
-        'allowed_attempts': 3,
-        'message_pattern': 'Code: %(code)s',
-        'code_expire': 2 * 60,  # 120 seconds
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://localhost:6379/0',
     }
 }
